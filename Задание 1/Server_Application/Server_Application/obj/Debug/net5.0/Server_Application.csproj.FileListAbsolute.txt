@@ -1,0 +1,15 @@
+C:\Users\Дмитрий\github_repo\s0172090_computers_net\Задание 1\Server_Application\Files\Debug\net5.0\Server_Application.exe
+C:\Users\Дмитрий\github_repo\s0172090_computers_net\Задание 1\Server_Application\Files\Debug\net5.0\Server_Application.deps.json
+C:\Users\Дмитрий\github_repo\s0172090_computers_net\Задание 1\Server_Application\Files\Debug\net5.0\Server_Application.runtimeconfig.json
+C:\Users\Дмитрий\github_repo\s0172090_computers_net\Задание 1\Server_Application\Files\Debug\net5.0\Server_Application.runtimeconfig.dev.json
+C:\Users\Дмитрий\github_repo\s0172090_computers_net\Задание 1\Server_Application\Files\Debug\net5.0\Server_Application.dll
+C:\Users\Дмитрий\github_repo\s0172090_computers_net\Задание 1\Server_Application\Files\Debug\net5.0\ref\Server_Application.dll
+C:\Users\Дмитрий\github_repo\s0172090_computers_net\Задание 1\Server_Application\Files\Debug\net5.0\Server_Application.pdb
+C:\Users\Дмитрий\github_repo\s0172090_computers_net\Задание 1\Server_Application\Server_Application\obj\Debug\net5.0\Server_Application.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Дмитрий\github_repo\s0172090_computers_net\Задание 1\Server_Application\Server_Application\obj\Debug\net5.0\Server_Application.AssemblyInfoInputs.cache
+C:\Users\Дмитрий\github_repo\s0172090_computers_net\Задание 1\Server_Application\Server_Application\obj\Debug\net5.0\Server_Application.AssemblyInfo.cs
+C:\Users\Дмитрий\github_repo\s0172090_computers_net\Задание 1\Server_Application\Server_Application\obj\Debug\net5.0\Server_Application.csproj.CoreCompileInputs.cache
+C:\Users\Дмитрий\github_repo\s0172090_computers_net\Задание 1\Server_Application\Server_Application\obj\Debug\net5.0\Server_Application.dll
+C:\Users\Дмитрий\github_repo\s0172090_computers_net\Задание 1\Server_Application\Server_Application\obj\Debug\net5.0\ref\Server_Application.dll
+C:\Users\Дмитрий\github_repo\s0172090_computers_net\Задание 1\Server_Application\Server_Application\obj\Debug\net5.0\Server_Application.pdb
+C:\Users\Дмитрий\github_repo\s0172090_computers_net\Задание 1\Server_Application\Server_Application\obj\Debug\net5.0\Server_Application.genruntimeconfig.cache
