@@ -1,0 +1,14 @@
+﻿  MyText.cpp
+C:\Users\Дмитрий\github_repo\s0172090_computers_net\Задание 1\Server_Application\Server_Streng_CPP\MyText.cpp(11,23): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\Дмитрий\github_repo\s0172090_computers_net\Задание 1\Server_Application\Server_Streng_CPP\MyText.cpp(59,23): warning C4018: <: несоответствие типов со знаком и без знака
+  Server_Streng_CPP.cpp
+C:\Users\Дмитрий\github_repo\s0172090_computers_net\Задание 1\Server_Application\Server_Streng_CPP\Server_Streng_CPP.cpp(12,27): warning C4129: s: неизвестная escape-последовательность
+C:\Users\Дмитрий\github_repo\s0172090_computers_net\Задание 1\Server_Application\Server_Streng_CPP\Server_Streng_CPP.cpp(13,29): warning C4129: c: неизвестная escape-последовательность
+C:\Users\Дмитрий\github_repo\s0172090_computers_net\Задание 1\Server_Application\Server_Streng_CPP\Server_Streng_CPP.cpp(23,23): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\Дмитрий\github_repo\s0172090_computers_net\Задание 1\Server_Application\Server_Streng_CPP\Server_Streng_CPP.cpp(55,23): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\Дмитрий\github_repo\s0172090_computers_net\Задание 1\Server_Application\Server_Streng_CPP\Server_Streng_CPP.cpp(69,23): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\Дмитрий\github_repo\s0172090_computers_net\Задание 1\Server_Application\Server_Streng_CPP\Server_Streng_CPP.cpp(101,23): warning C4018: <: несоответствие типов со знаком и без знака
+  Создание кода...
+Server_Streng_CPP.obj : error LNK2005: "wchar_t const * const alphavit" (?alphavit@@3PB_WB) уже определен в MyText.obj
+Server_Streng_CPP.obj : error LNK2005: "char const * const alphavit_char" (?alphavit_char@@3PBDB) уже определен в MyText.obj
+C:\Users\Дмитрий\github_repo\s0172090_computers_net\Задание 1\Server_Application\Debug\Server_Streng_CPP.exe : fatal error LNK1169: обнаружен многократно определенный символ - один или более

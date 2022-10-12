@@ -4,52 +4,70 @@
 #include <iostream>
 #include<string>
 #include<fstream>
-using namespace std;
+#include"MyText.h"
+//using namespace std;
 const string i_file = "client.txt";
 const string o_file = "server.txt";
+const char* f_serv_name = "serv.txt";
+const char* f_client_name = "client.txt";
 int main()
 {
-	setlocale(0, "Rus");
-	ofstream ser_file(o_file);
-	while (!ser_file.is_open())
+
+	//setlocale(0, "Rus");
+	SetLocale();
+	fstream f;
+	//f.open(f_serv_name, ios_base::in, _SH_DENYNO);
+	
+	int t1=0, t2=0;
+	while (true) {
+		f.open(f_serv_name, ios_base::in, _SH_DENYNO);
+		while (f.is_open()==false)
 	{
 
 	}
-	ifstream client_file(i_file);
-	while (!client_file.is_open()) {
+		//f.sync();
+		//t2 = f.tellg();
+		//if (t1 != t2) {
 
-	}
-	string command = "";string o_data="";
-	command += "4";
-	ser_file << command << endl;
-	ser_file.flush();
-	while (client_file.eof()) {
 
-	}
-	while (!client_file.eof()) {
-while (getline(client_file,o_data)) {
-		cout << o_data;
-	}
+			string w,w1="";
+			//t2 = f.tellg();
+			//if (t1 != t2) {
+			if (f.tellg() > t1) {
+				f.seekg(t1);
+				w1 = "";
+
+				//while (!f.eof()) {
+				getline(f, w);
+				if (w != "") {
+					wcout << "read" << endl;
+					w1 = w;
+					t1 += w.length();
+					w = "";
+				}
+				//f.flush();
+				//}
+				if (w1 != "") {
+					wcout << ToSTD_WSTRING(w) << endl;
+					//f.flush();
+				}
+				//t1 = t2;
+			//}
+			//while (!f.eof()) {
+				/*getline(f, w);
+				if (w != "") {
+					wcout << ToSTD_WSTRING(w) << endl;
+
+				}
+				f.flush();*/
+				//}
+				//f.flush();
+				//t1 = t2;
+			//}
+			}
+		f.close();
 	}
 	
-	cout << endl;
-	while (true)
-	{
-		if (getline(cin, command)) {
-ser_file << command << endl;
-		ser_file.flush();
-		while (client_file.eof()) {
-
-		}
-		while (!client_file.eof()) {
-while (getline(client_file, o_data)) {
-			cout << o_data;
-		}
-		}
-		}
-		
-		
-	}
 	return 0;
 }
 

@@ -1,0 +1,5 @@
+﻿  Client_Application.cpp
+C:\Users\Дмитрий\github_repo\s0172090_computers_net\Задание 1\Server_Application\Client_Application\Client_Application.cpp(45,22): warning C4267: +=: преобразование из "size_t" в "int"; возможна потеря данных
+  MyText.cpp
+  Создание кода...
+  Client_Application.vcxproj -> C:\Users\Дмитрий\github_repo\s0172090_computers_net\Задание 1\Server_Application\x64\Debug\Client_Application.exe
