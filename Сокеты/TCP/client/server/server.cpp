@@ -36,7 +36,7 @@ int SCHECK_MODEL(Model model) {
         return -3;
    /* if (model.FI <= 0)
         return -1;*/
-    if (model.ID < 0)
+    if (model.ID < 0||model.ID>5)
         return -2;
     return 0;
 }
@@ -51,7 +51,7 @@ string CreateResult(Model m) {
         return "error in FI";
 
     case -2:
-        return "error in R";
+        return "error in ID";
     case -3:
         return "Bye";
     default:

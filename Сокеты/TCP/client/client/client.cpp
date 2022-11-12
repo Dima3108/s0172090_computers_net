@@ -27,7 +27,7 @@ int main()
     setlocale(0, "Rus");
     char buff[1024];
     if (WSAStartup(0x0202, (WSADATA*)&buff[0])) {
-        cout << WSAGetLastError();
+      std::  cout << WSAGetLastError();
         return -1;
     }
     SOCKET s;
@@ -47,6 +47,9 @@ int main()
     connect(s, (sockaddr*)&srv_sin, sizeof(srv_sin));
     string mst;
     Model mod;
+   std:: cout << "Программа вычисляет количество оборотов в минуту для электродвигателя постоянного тока.\n"<<
+        "Поток, создаваемый обмоткой возбуждения и  сопротивление цепи якоря беруться в качестве константных велмчин и хранятся на сервере.\n "<<
+        "Возможна погрешность результата , выдоваемого программой ." << endl;
     while (true)
     {
 
@@ -61,13 +64,13 @@ int main()
         getline(cin, mst);
         int msg_size = mst.size();
         send(s, (char*)mst.c_str(), msg_size, 0);*/
-        cout << "Хотите завершить работу\n(Y(Да)/N(Нет))";
+       std:: cout << "Хотите завершить работу\n(Y(Да)/N(Нет))";
         string v;
         cin >> v;
         if (v == "N") {
-            cout << "Введите напряжение подводимое к обмотке якоря \n";
+           std:: cout << "Введите напряжение подводимое к обмотке якоря \n";
             cin >> mod.U;
-            cout << "Введите позицию двигателя [0;5]  \n";
+            std::cout << "Введите позицию двигателя [0;5]  \n";
             cin >> mod.ID;
            /* cin >> mod.I;
             cout << "Введите сопротивление обмотки якоря \n";
@@ -88,16 +91,16 @@ int main()
         string s = "";
         for (int i = 0; i < size; i++)
             s+= res[i];
-        cout << "Скорость двигателя :";
-        cout <<s;
-        cout << "обр/мин\n";
+     std::   cout << "Скорость двигателя :";
+     std::   cout <<s;
+     std::   cout << "обр/мин\n";
         delete[]res;
         if (s == "Bye")
             break;
 
     } 
     //while (mst != "Bye");
-    cout << "exit" << endl;
+ std::   cout << "exit" << endl;
     closesocket(s);
     return 0;
 }
