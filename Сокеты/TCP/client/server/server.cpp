@@ -15,8 +15,7 @@
 //#define CLNT_PORT 1235
 #define BUF_SIZE 64
 using namespace std;
-//const string QUEST = "Who are you?\n";
-//#define C 1.0
+
 #define EXIT -2222
 struct Model {
     //double I, U, R, FI;
@@ -34,8 +33,7 @@ double ValtageOnAnchor(double U, int ID) {//напряжение на якоре
 int SCHECK_MODEL(Model model) {
     if (model.ID == EXIT)
         return -3;
-   /* if (model.FI <= 0)
-        return -1;*/
+  
     if (model.ID < 0||model.ID>5)
         return -2;
     return 0;
@@ -96,10 +94,9 @@ int main()
         from_len = sizeof(from_sin);
         s_new = accept(s, (sockaddr*)&from_sin, &from_len);
         cout << "new connected client!" << endl;
-        //msg = QUEST;
+        
         while (1) {
-           // send(s_new, (char*)&msg[0], msg.size(), 0);
-           // from_len = recv(s_new, (char*)buf, BUF_SIZE, 0);
+           
             from_len = recv(s_new, (char*)&buf, sizeof(Model), 0);
             string res = CreateResult(buf);
             int size = res.size();
@@ -107,12 +104,7 @@ int main()
             send(s_new, (char*)res.c_str(), size, 0);
             if (res == "Bye")
                 break;
-          /*  buf[from_len] = 0;
-            msg1 = (string)buf;
-            cout << msg1 << endl;
-            if (msg1 == "Bye")
-                break;
-            getline(cin, msg);*/
+        
         }
         cout << "client is lost";
         closesocket(s_new);

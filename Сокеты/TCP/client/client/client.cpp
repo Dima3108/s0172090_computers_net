@@ -54,16 +54,7 @@ int main()
     {
 
     
-    //do {
-       // from_len = recv(s, (char*)&buf, BUF_SIZE, 0);
-       // buf[from_len] = 0;
-        //cout << buf << endl;
-       /* for (int i = 0; i < from_len; i++)
-            cout << buf[i];
-        cout << endl;
-        getline(cin, mst);
-        int msg_size = mst.size();
-        send(s, (char*)mst.c_str(), msg_size, 0);*/
+   
        std:: cout << "Хотите завершить работу\n(Y(Да)/N(Нет))";
         string v;
         cin >> v;
@@ -85,7 +76,7 @@ int main()
         int size=0;
         recv(s, (char*)&size, sizeof(int), 0);
         
-        //cout << size<<endl;
+     
         char* res = new char[size];
         recv(s, res, size, 0);
         string s = "";
@@ -99,7 +90,7 @@ int main()
             break;
 
     } 
-    //while (mst != "Bye");
+  
  std::   cout << "exit" << endl;
     closesocket(s);
     return 0;
