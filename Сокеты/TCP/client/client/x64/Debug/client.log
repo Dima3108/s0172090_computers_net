@@ -1,0 +1,4 @@
+﻿  client.cpp
+C:\Users\Дмитрий\github_repo\s0172090_computers_net\Сокеты\TCP\client\client\client.cpp(40,30): warning C4553: "==": результат выражения не используется; вы хотели использовать "="?
+C:\Users\Дмитрий\github_repo\s0172090_computers_net\Сокеты\TCP\client\client\client.cpp(34,9): warning C4101: from_len: неиспользованная локальная переменная
+  client.vcxproj -> C:\Users\Дмитрий\github_repo\s0172090_computers_net\Сокеты\TCP\client\x64\Debug\client.exe
