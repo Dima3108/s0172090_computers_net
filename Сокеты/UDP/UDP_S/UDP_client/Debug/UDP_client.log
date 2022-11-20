@@ -1,0 +1,3 @@
+﻿  UDP_client.cpp
+C:\Users\Дмитрий\source\repos\UDP_S\UDP_client\UDP_client.cpp(79,11): warning C4129: T: неизвестная escape-последовательность
+  UDP_client.vcxproj -> C:\Users\Дмитрий\source\repos\UDP_S\Debug\UDP_client.exe
