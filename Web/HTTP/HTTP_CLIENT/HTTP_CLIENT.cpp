@@ -8,7 +8,7 @@
 
 #pragma comment (lib,"Ws2_32.lib")
 std::string request(std::string adres) {
-	return "/Index GET HTTP/1.0\r\nHost:" + adres + " \r\n\r\n";
+	return " GET HTTP/1.0\r\nHost:" + adres + " \r\n\r\n";
  }
 int main()
 {
