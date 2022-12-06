@@ -3,12 +3,12 @@
 #define _WINSOCK_DEPRECATED_NO_WARNINGS
 #include <iostream>
 #include "winsock2.h"
-#define MAX_PACKET_SIZE 4096
+#define MAX_PACKET_SIZE 4096*10
 
 
 #pragma comment (lib,"Ws2_32.lib")
 std::string request(std::string adres) {
-	return "GET HTTP/1.0\r\nHost:" + adres + " \r\n\r\n";
+	return "/Index GET HTTP/1.0\r\nHost:" + adres + " \r\n\r\n";
  }
 int main()
 {
