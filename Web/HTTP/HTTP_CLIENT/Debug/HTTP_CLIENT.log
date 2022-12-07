@@ -1,2 +1,5 @@
 ﻿  HTTP_CLIENT.cpp
+C:\Users\Дмитрий\github_repo\s0172090_computers_net\Web\HTTP\HTTP_CLIENT\HTTP_CLIENT.cpp(23,16): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\Дмитрий\github_repo\s0172090_computers_net\Web\HTTP\HTTP_CLIENT\HTTP_CLIENT.cpp(33,22): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\Дмитрий\github_repo\s0172090_computers_net\Web\HTTP\HTTP_CLIENT\HTTP_CLIENT.cpp(50,20): warning C4018: <: несоответствие типов со знаком и без знака
   HTTP_CLIENT.vcxproj -> C:\Users\Дмитрий\github_repo\s0172090_computers_net\Web\HTTP\Debug\HTTP_CLIENT.exe

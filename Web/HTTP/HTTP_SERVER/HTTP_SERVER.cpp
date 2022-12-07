@@ -3,6 +3,8 @@
 #define _WINSOCK_DEPRECATED_NO_WARNINGS
 #include <iostream>
 #include<WinSock2.h>
+#include<sstream>
+#include<WS2tcpip.h>
 #include<string>
 #pragma comment(lib,"Ws2_32.lib")
 using namespace std;
@@ -42,7 +44,7 @@ int main()
         WSACleanup();
         return -3;
     }
-    cout << "Waiting connections \n";
+    cout << "Waiting connections on port:" << MY_PORT << "\n";
     SOCKET client_socket;
     sockaddr_in client_addr;
     int client_addr_size = sizeof(client_addr);
@@ -66,13 +68,40 @@ DWORD WINAPI ConToClient(LPVOID client_socket) {
     int len;
     my_sock = ((SOCKET*)client_socket)[0];
     char buff[1024];
-    char sHELLO[] = "Hellow ,Student \r\n";
-    send(my_sock, sHELLO, sizeof(sHELLO), 0);
-    while (SOCKET_ERROR != (len = recv(my_sock, (char*)&buff[0], 1024, 0))) {
-        buff[len] = '\0';
-        cout << "received:" << buff << endl;
-        send(my_sock, buff, len, 0);
-    }
+    const char apf = '"';
+    std::stringstream response, response_body;
+    response_body << " <!DOCTYPE html>\r\n";
+    response_body << "<title>" << "Многопоточный сервер"
+        << "</title>"
+        << "<html>"
+        <<"<head></head>"
+        <<"<body>"
+        <<"<div>"
+        <<"<button>Эта кнопка ничего не делает , не нажимайте ее.</button>"
+        <<"</div>"
+        << "<h1>Hellow student</h1>" << "\n"
+        << "</html><body>\n";
+    response << "HTTP/1.1 200 OK\r\n"  <<
+ "Document folows Date:"<<"11:11:11" <<
+        "Content-Type: text:/html;\r\n"<<
+        "charset=utf-16"<<
+        "Server:localh\r\n"
+        << "Content-Length:" << response_body.str().length() << "\r\n\r\n" << response_body.str();
+    //char sHELLO[] = "<html><body>Hellow, Student</body> < / html>\r\n";
+    //send(my_sock, sHELLO, sizeof(sHELLO), 0);
+ int i= send(my_sock, response.str().c_str(), response.str().length(), 0); 
+
+   while (SOCKET_ERROR != (len = recv(my_sock, (char*)&buff[0], 1024, 0))) {
+       buff[len] = '\0';
+       string v = "";
+       for (int i = 0; i < len; i++)
+           v += buff[i];
+       cout << "received:" << v << endl;
+       if (len==0) {
+           break;
+       }
+   }
+ 
     nclients--;
     cout << "-disconnect\n";
     PRINTNUSERS
