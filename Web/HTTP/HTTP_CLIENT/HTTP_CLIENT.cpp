@@ -71,35 +71,60 @@ int main()
 	}
 	std::string site_name;
 	std::cin >> site_name;
-	if (NULL == (hn = gethostbyname(/*site_name.c_str()*/convert_adrr(site_name).c_str()))) {
-		return -3;
-	}
-	adr.sin_family = AF_INET;
-	((unsigned long*)&adr.sin_addr)[0] = ((unsigned long**)hn->h_addr_list)[0][0];
-	adr.sin_port = htons(get_port(site_name));
-	if (SOCKET_ERROR == connect(s, (sockaddr*)&adr, sizeof(adr))) {
-		return -4;
-	}
-	std::string req = request(site_name);
-	if (SOCKET_ERROR == send(s, req.c_str(), req.size(), 0)) {
-		return -5;
-	}
-	int len = 0;
-	do {
-		if (SOCKET_ERROR == (len = recv(s, (char*)buff, MAX_PACKET_SIZE, 0))) {
-			return WSAGetLastError();
+	if (IS_DOMANE_NAME(site_name.c_str())) {
+		if (NULL == (hn = gethostbyname(site_name.c_str()))) {
+			return -3;
 		}
-		buff[len] = 0;
-	std::	cout << buff;
-	/*if (len == 0) {
-		if (SOCKET_ERROR == closesocket(s)) {
-			return -7;
+		adr.sin_family = AF_INET;
+		((unsigned long*)&adr.sin_addr)[0] = ((unsigned long**)hn->h_addr_list)[0][0];
+		adr.sin_port = htons(80);
+		if (SOCKET_ERROR == connect(s, (sockaddr*)&adr, sizeof(adr))) {
+			return -4;
 		}
-		return 0;
-	}*/
-	std::cout << "Окончить прием данных?(Y (да)/N(нет))" <<std:: endl;
-	
-	} while (len != 0);
+		if (SOCKET_ERROR == send(s, request(site_name).c_str(), request(site_name).length(),0)) {
+			return -5;
+		}
+		int len = 0;
+		do {
+			if (SOCKET_ERROR == (len = recv(s, (char*)&buff, MAX_PACKET_SIZE, 0))) {
+				std::cout << WSAGetLastError();
+				return -6;
+			}
+			buff[len] = 0;
+			std::cout << buff;
+		} while (len != 0);
+	}
+	else {
+		if (NULL == (hn = gethostbyname(/*site_name.c_str()*/convert_adrr(site_name).c_str()))) {
+			return -3;
+		}
+		adr.sin_family = AF_INET;
+		((unsigned long*)&adr.sin_addr)[0] = ((unsigned long**)hn->h_addr_list)[0][0];
+		adr.sin_port = htons(get_port(site_name));
+		if (SOCKET_ERROR == connect(s, (sockaddr*)&adr, sizeof(adr))) {
+			return -4;
+		}
+		std::string req = request(site_name);
+		if (SOCKET_ERROR == send(s, req.c_str(), req.size(), 0)) {
+			return -5;
+		}
+		int len = 0;
+		do {
+			if (SOCKET_ERROR == (len = recv(s, (char*)buff, MAX_PACKET_SIZE, 0))) {
+				return WSAGetLastError();
+			}
+			buff[len] = 0;
+			std::cout << buff;
+			/*if (len == 0) {
+				if (SOCKET_ERROR == closesocket(s)) {
+					return -7;
+				}
+				return 0;
+			}*/
+			std::cout << "Окончить прием данных?(Y (да)/N(нет))" << std::endl;
+
+		} while (len != 0);
+	}
 	if (SOCKET_ERROR == closesocket(s)) {
 		return -7;
 	}
