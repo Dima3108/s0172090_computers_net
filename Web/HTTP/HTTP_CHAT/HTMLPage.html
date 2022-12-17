@@ -1,9 +1,36 @@
 <!DOCTYPE html>
 <html>
+<head>
+    <meta lang="ru" />
+</head>
 <body>
-<label>
+<h3>
     Online чат
 
-</label>
+</h3>
+    <span id="spa1"></span>
+    <textarea  id="it34">
+Ваш комментарий
+</textarea>
+    <button type="button" id="sb67">Отправить</button>
+    <script>
+        var but = document.getElementById("sb67");
+        but.addEventListener("click", function () {
+            var tx = document.getElementById("it34");
+            if (tx.textContent != null && String(tx.textContent) != "") {
+                var text = String(tx.textContent);
+                var res = document.getElementById("spa1");
+                try {
+                    var xhr = new XMLHttpRequest();
+                    xhr.open("GET", "http://192.168.1.126:667/");
+                    xhr.send(text);
+                    res.textContent = "ваше сообщение отправленно";
+                }
+                catch {
+                    res.textContent = "произошла ошибка отправки , повторите попытку";
+                }
+            }
+        });
+    </script>
 </body>
 </html>
