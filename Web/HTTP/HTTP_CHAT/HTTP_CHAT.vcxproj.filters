@@ -18,8 +18,16 @@
     <ClCompile Include="HTTP_CHAT.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="UriCoder.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="HTMLPage.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="UriCoder.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

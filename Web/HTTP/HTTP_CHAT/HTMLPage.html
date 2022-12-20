@@ -14,6 +14,7 @@
 </textarea>
     <button type="button" id="sb67">Отправить</button>
     <script>
+       
         var but = document.getElementById("sb67");
         but.addEventListener("click", function () {
             var tx = document.getElementById("it34");
@@ -22,9 +23,11 @@
                 var res = document.getElementById("spa1");
                 try {
                     var xhr = new XMLHttpRequest();
-                    xhr.open("GET", "http://192.168.1.126:667/");
+                    xhr.open("POST", "http://192.168.1.126:666/");
+                    
                     xhr.send(text);
                     res.textContent = "ваше сообщение отправленно";
+                   
                 }
                 catch {
                     res.textContent = "произошла ошибка отправки , повторите попытку";
