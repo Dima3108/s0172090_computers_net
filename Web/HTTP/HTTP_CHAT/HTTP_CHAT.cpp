@@ -28,10 +28,17 @@ DWORD WINAPI ConToClient(LPVOID client_socket);
 DWORD WINAPI ChatThread(LPVOID id);
 int nclients = 0;
 SOCKET connections[100];
+HANDLE hMutex;
+vector<string>MESSAGES;
 void SetLocale() {
     _setmode(_fileno(stdout), _O_U16TEXT);
     _setmode(_fileno(stdin), _O_U16TEXT);
     _setmode(_fileno(stderr), _O_U16TEXT);
+}
+void AddMessage(std::string val) {
+  //  if (val != "") {
+        MESSAGES.push_back(val);
+    //}
 }
 // string html_content = "";
 int main()
@@ -66,6 +73,7 @@ int main()
         WSACleanup();
         return -3;
     }
+    hMutex = CreateMutex(NULL, false, NULL);
    //std:: wcout << L"Waiting connections on port:" << MY_PORT << "\n";
     SOCKET client_socket;
     sockaddr_in client_addr;
@@ -78,7 +86,8 @@ int main()
     SOCKET sListen = socket(AF_INET, SOCK_STREAM, NULL);
     bind(sListen, (SOCKADDR*)&sers, sizeof(sers));
     listen(sListen, 100);
-    while ((client_socket = accept(mysocket, (sockaddr*)&client_addr, &client_addr_size))) {
+    while (1) {
+  while ((client_socket = accept(mysocket, (sockaddr*)&client_addr, &client_addr_size))) {
         
         //connections[nclients++] = client_socket;
         HOSTENT* hst;
@@ -90,10 +99,12 @@ int main()
        // PRINTNUSERS
            std:: cout << endl;
         DWORD thID;
-        CreateThread(NULL, NULL, ConToClient, &client_socket, NULL, &thID);
+        CreateThread(NULL, NULL, ConToClient, &client_socket, 1024*1024, &thID);
     }
+    }
+  
    
-    SOCKET newConnection;
+   /* SOCKET newConnection;
     for (int i = 0; i < 100; i++) {
         newConnection = accept(sListen, (SOCKADDR*)&sers, &ssize);
         if (newConnection != 0) {
@@ -101,7 +112,7 @@ int main()
             connections[i] = newConnection;
             CreateThread(NULL, NULL, ChatThread, &i, NULL, NULL);
         }
-    }
+    }*/
     return 0;
 }
 string obr(string s) {
@@ -115,7 +126,7 @@ string obr(string s) {
         n += s[i];
     return n;
 }
-vector<string>MESSAGES;
+
 stringstream CreateOtwHtml(string quets) {
 std:stringstream s;
    s<< "HTTP/1.1 200 OK\r\n" <<
@@ -169,8 +180,8 @@ DWORD WINAPI ConToClient(LPVOID client_socket) {
     //std::cout << "#" << i;
     
     bool innit = false;
-    while (SOCKET_ERROR != (len = recv(my_sock, /*(char*)&buff[0]*/buff, BUF_SIZE, 0))) {
-        std::cout << "#" << len << endl;
+    while (SOCKET_ERROR != (len = recv(my_sock, (char*)&buff[0], BUF_SIZE, 0))) {
+        //std::cout << "#" << len << endl;
         if (len > 0) {
             buff[len] = '\0';
             
@@ -186,11 +197,19 @@ int i = send(my_sock, response.str().c_str(), response.str().length(), 0);
 
           }
           else {
-              MESSAGES.push_back(g);
+              
+                  WaitForSingleObject(hMutex, INFINITE);
+//if (g != "") {
+                // MESSAGES.push_back(g);
+                  AddMessage(g);
+  // }
+                  ReleaseMutex(hMutex);
+           
               string otv = "";
+              WaitForSingleObject(hMutex, INFINITE);
               for (int i = 0; i < MESSAGES.size(); i++)
                   otv += MESSAGES[i] + "\n";
-
+              ReleaseMutex(hMutex);
               stringstream o = CreateOtwHtml(otv);
               send(my_sock, o.str().c_str(), o.str().length(), 0);
           }

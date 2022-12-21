@@ -13,7 +13,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "HTTP_SERVER_ONE_THREAD", "H
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "HTTP_CHAT", "HTTP_CHAT\HTTP_CHAT.vcxproj", "{B5A67047-8401-4BDE-97A9-6EE4B47E3C39}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApplication1", "WebApplication1\WebApplication1.csproj", "{FE636936-B7B5-4D88-A23A-78B958078C89}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApplication1", "WebApplication1\WebApplication1.csproj", "{FE636936-B7B5-4D88-A23A-78B958078C89}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

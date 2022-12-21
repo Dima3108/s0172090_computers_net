@@ -8,23 +8,39 @@
     Online чат
 
 </h3>
+<div  id="usnic">
+    <label>Введите ваш ник</label>
+    <input type="text" id="usname" />
+    <button type="button" id="regus">Сохранить</button>
+</div>
     <span id="spa1"></span>
     <form>
-        <textarea name="text" id="it34">
+        <textarea name="text" id="it34" >
 Ваш комментарий
 </textarea>
-        <button type="button" id="sb67">Отправить</button>
+        <button type="button" id="sb67" style="display:none">Отправить</button>
     </form>
-   <textarea id="restext">
+   <div id="resd">
 
-</textarea>
+   </div>
+    <style>
+       .me{
+           text-align:right;
+           background-color:darkgrey;
+           display:block;
+           color:black;
+       }
+        .you {
+            text-align: left;
+            display:block;
+            background-color: aqua;
+            color: black;
+        }
+    </style>
     <script>
-       
-        var but = document.getElementById("sb67");
-        but.addEventListener("click", function () {
-            let tx = document.getElementById("it34");
-            if (tx.textContent != null && String(tx.textContent) != "") {
-               
+        function write(textval) {
+          
+
                 var res = document.getElementById("spa1");
                 try {
                     var xhr = new XMLHttpRequest();
@@ -34,21 +50,65 @@
                         if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
                             var val_ = xhr.responseText;
                             const masn = val_.split('\n');
-                            var rdial = document.getElementById("restext");
-                            rdial.value = "";
+                            var rdial = document.getElementById("resd");
+                            rdial.innerHTML = "";
+                            const iuser = '[' + localStorage.getItem("user") + "]:";
                             for (var e = 0; e < masn.length; e++) {
-                                rdial.value += decodeURI( masn[e]) + "\n\n";
+
+                                var lab = document.createElement("div");
+                                var value_ = decodeURI(masn[e]);
+                                lab.textContent = value_;
+                                if (value_.includes(iuser) == true) {
+                                    lab.className = "me";
+                                }
+                                else {
+                                    lab.className = "you";
+                                }
+                                rdial.appendChild(lab);
                             }
                         };
                     };
-                    var val_enc =  encodeURI(tx.value);
+                    var val_enc = encodeURI( textval);
                     xhr.send(val_enc);
                     res.textContent = "ваше сообщение отправленно";
-                   
+
                 }
                 catch {
                     res.textContent = "произошла ошибка отправки , повторите попытку";
                 }
+            
+        }
+        function ONMAIN() {
+            var main_ = document.getElementById("sb67");
+            main_.style = "display:block";
+            var d = document.getElementById("usnic");
+            d.style = "display:none";
+            setInterval(write, 1000, "");
+        }
+        var but = document.getElementById("sb67");
+        but.addEventListener("click", function () {
+            let tx = document.getElementById("it34");
+            if (tx.textContent != null && String(tx.textContent) != "") {
+                write('[' + localStorage.getItem("user") + "]:" +tx.value);
+            }
+        });
+       
+        window.addEventListener('DOMContentLoaded', function () {
+            if (localStorage.getItem("usname") == null || localStorage.getItem("usname")=="") {
+                var d = document.getElementById("usnic");
+                d.style = "display:block";
+
+            }
+            else {
+                ONMAIN();
+            }
+        });
+        var saveus = document.getElementById("regus");
+        saveus.addEventListener("click", function () {
+            var inp = document.getElementById("usname");
+            if (String(inp.value) != null && String(inp.value).length > 0) {
+                localStorage.setItem("user", String(inp.value));
+                ONMAIN();
             }
         });
     </script>
