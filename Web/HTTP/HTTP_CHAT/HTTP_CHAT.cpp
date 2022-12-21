@@ -8,7 +8,7 @@
 #include<WS2tcpip.h>
 #include<string>
 #include<fstream>
-#include"UriCoder.h"
+
 #include <string> 
 #include <locale> 
 #include <codecvt>
@@ -28,10 +28,16 @@ DWORD WINAPI ConToClient(LPVOID client_socket);
 DWORD WINAPI ChatThread(LPVOID id);
 int nclients = 0;
 SOCKET connections[100];
+void SetLocale() {
+    _setmode(_fileno(stdout), _O_U16TEXT);
+    _setmode(_fileno(stdin), _O_U16TEXT);
+    _setmode(_fileno(stderr), _O_U16TEXT);
+}
 // string html_content = "";
 int main()
 {
     setlocale(0, "Rus");
+   // SetLocale();
     char buff[1024];
   std::  cout << "TCP ECHO-SERVER \n";
     if (WSAStartup(0x0202, (WSAData*)&buff[0])) {
@@ -109,17 +115,23 @@ string obr(string s) {
         n += s[i];
     return n;
 }
-void SetLocale() {
-    _setmode(_fileno(stdout), _O_U16TEXT);
-    _setmode(_fileno(stdin), _O_U16TEXT);
-    _setmode(_fileno(stderr), _O_U16TEXT);
+vector<string>MESSAGES;
+stringstream CreateOtwHtml(string quets) {
+std:stringstream s;
+   s<< "HTTP/1.1 200 OK\r\n" <<
+        "Document folows Date:" << "11:11:11" <<
+        "Content-Type: text/html;\r\n" <<
+        "charset=utf-8" <<
+        "Server:localh\r\n"
+       << "Content-Length:" << quets.length() << "\r\n\r\n" << quets.c_str();
+   return s;
 }
-
+#define BUF_SIZE 1024*512
 DWORD WINAPI ConToClient(LPVOID client_socket) {
     SOCKET my_sock;
     int len;
     my_sock = ((SOCKET*)client_socket)[0];
-    char buff[1024];
+    char buff[BUF_SIZE];
     const char apf = '"';
     std::stringstream response, response_body;
     //response_body << html_content;
@@ -153,23 +165,36 @@ DWORD WINAPI ConToClient(LPVOID client_socket) {
     //char sHELLO[] = "<html><body>Hellow, Student</body> < / html>\r\n";
     //send(my_sock, sHELLO, sizeof(sHELLO), 0);
 
-    int i = send(my_sock, response.str().c_str(), response.str().length(), 0);
+    
     //std::cout << "#" << i;
-    if (i == SOCKET_ERROR) {
-
-    }
-   
-    while (SOCKET_ERROR != (len = recv(my_sock, (char*)&buff[0], 1024, 0))) {
+    
+    bool innit = false;
+    while (SOCKET_ERROR != (len = recv(my_sock, /*(char*)&buff[0]*/buff, BUF_SIZE, 0))) {
+        std::cout << "#" << len << endl;
         if (len > 0) {
             buff[len] = '\0';
             
             string v = "";
             for (int i = 0; i < len; i++)
                 v += buff[i];
-            cout << "received:" << v << endl;
+          std::  cout << "received:" << v << endl;
             string g = obr(v);
-            cout << g << endl;
-            send(my_sock, g.c_str(), g.length(), 0);
+          std::  cout << g << endl;
+          if (!innit) {
+              innit = true;
+int i = send(my_sock, response.str().c_str(), response.str().length(), 0);
+
+          }
+          else {
+              MESSAGES.push_back(g);
+              string otv = "";
+              for (int i = 0; i < MESSAGES.size(); i++)
+                  otv += MESSAGES[i] + "\n";
+
+              stringstream o = CreateOtwHtml(otv);
+              send(my_sock, o.str().c_str(), o.str().length(), 0);
+          }
+          std::  cout << "t" << endl;
             /*string vl = obr(v);
             const char* val = vl.c_str();
             int len = ((int)(val[0]) * 256) + ((int)val[1]);
@@ -178,12 +203,14 @@ DWORD WINAPI ConToClient(LPVOID client_socket) {
             /*if (len == 0) {
                 break;
             }*/
+          for (int i = 0; i < BUF_SIZE; i++)
+              buff[i] = 0;
         }
        // break;
     }
  
     nclients--;
-    cout << "-disconnect\n";
+  std::  cout << "-disconnect\n";
     PRINTNUSERS
         closesocket(my_sock);
     return 0;
